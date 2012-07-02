@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Support Detection Example</title>
+	<style type="text/css">
+		/* Example CSS */
+		#support{background: #B44343;padding: 20px 20px 0; color: #fff;text-shadow: 0 1px 1px #000;font-weight: bold;border-bottom: 3px solid #5A0909;}
+		#support a{color:#fff; text-decoration: underline;}
+		#support a:hover{text-decoration: none;}
+	</style>
+</head>
+<body>
+	<!-- Start Required HTML -->
+	<div id="support" style="display:none;">
+	<p id="support-js" style="display:none;">Please enable javascript to view this site. <a href="http://support.google.com/bin/answer.py?hl=en&amp;answer=23852" target="_blank">How to enable JavaScript</a>.</p>
+	</div><noscript><style type="text/css">#support, #support-js{display:block !important;}</style></noscript>
+	<!-- End Required HTML -->
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="jquery.supportdetection.js"></script>
+	<script>var supportDetection = CWjQuery('#support').supportdetection();</script>
+</body>
+</html>
