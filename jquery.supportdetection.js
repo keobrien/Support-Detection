@@ -62,7 +62,7 @@ Version: .1
 			this.get_os_version();
 			if(this.s.test_mobile_os) this.test_os_version();
 		}else {
-			if(this.test_browser) this.test_browsers();
+			if(this.s.test_browser) this.test_browsers();
 		}
 
 		return this;
@@ -140,7 +140,7 @@ Version: .1
 			this.found.browser_version = $.browser.version;
 			this.found.supported_browser_version = this.s[device];
 			
-			if(this.s.test_mobile_os || !this.test_device) return;
+			if(this.s.test_mobile_os || !this.s.test_device) return;
 			if(!this.s[device] || ($.browser.version < this.s[device])) this.devive_not_supported(device);
 		}
 		
