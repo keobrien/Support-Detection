@@ -23,14 +23,19 @@ Version: .1
 			// Ref: http://www.useragentstring.com/pages/useragentstring.php
 			// Cookies
 			cookies:	true,
-			mookie_msg:	'<p id="support-cookies">Please enable cookies to view this site. <a href="http://support.google.com/accounts/bin/answer.py?hl=en&answer=61416" target="_blank">How to enable Cookies</a>.</p>',
+			mookie_msg:	'<p id="support-cookies">Cookies have to be enabled to view this site. Learn <a href="http://support.google.com/accounts/bin/answer.py?hl=en&answer=61416" target="_blank">how to enable cookies</a>.</p>',
 			// Browsers
 			safari:		531,		// v5.0
+			safari_human: 5,
 			chrome:		535,		// v19
+			chrome_human: 19,		// v19
 			msie:		7,
-			mozilla:	12,
+			msie_human:	7,
+			firefox:	12,
+			firefox_human: 12,
 			opera:		false,		// no support
-			browser_msg: '<p id="support-browser">Your browser may not support this site. Pages might not look or function quite right until you update your browser or download the latest version of <a href="http://www.google.com/chrome">Google Chrome</a> or <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>.</p>',
+			opera_human: null,
+			browser_msg: '<p id="support-browser">This is site will look and function best using the most updated version of your browser. Please check the supported list below. You can download the latest version of <a href="http://www.google.com/chrome">Google Chrome</a> or <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> to have the best experience.</p>',
 			test_browser: false,
 			// Devices
 			ipad:		534,		// v2:534, v1:533
@@ -47,7 +52,7 @@ Version: .1
 			android_os:		2.3,
 			blackberry_os:	false,	// no support
 			windows_phone_os: false,// no support
-			device_msg:		'<p id="support-device">Your device may not support this site. Pages might not look or function quite right. If you are using Android or iOS (iPhone, iPad or iPods) please try updating your operating system</p>',
+			device_msg:		'<p id="support-device">This is site may look and function best using the most updated version of your operating system. Please check the supported list below or try updating your device opperating system.</p>',
 			test_mobile_os: false
 		}, s);
 		this.uagent = navigator.userAgent.toLowerCase();
@@ -64,6 +69,7 @@ Version: .1
 		}else {
 			if(this.s.test_browser) this.test_browsers();
 		}
+		if(this.not_supported.length > 0) this.show_supported();
 
 		return this;
 	};
@@ -181,6 +187,30 @@ Version: .1
 				.show();
 				
 			this.not_supported.push(fail);
+		}
+		
+		, show_supported: function() {
+			var msg = '';
+			var browser_support = ['safari', 'chrome', 'msie', 'firefox', 'opera'];
+			for(var i=0; i < browser_support.length; i++) {
+				var support = this.s[browser_support[i]];
+				if(msg && support) msg += ', ';
+				if(!msg && support) msg += 'Desktop: ';
+				if(support) msg += browser_support[i] + ' ' + this.s[browser_support[i]+'_human'] + '+';
+			}
+			this.el
+				.append('<p>'+msg+'</p>')
+			var msg = '';
+			var device_os = ['ipad_os', 'ipod_os', 'iphone_os', 'android_os', 'blackberry_os', 'windows_phone_os'];
+			for(var i=0; i < device_os.length; i++) {
+				var support = this.s[device_os[i]];
+				if(msg && support) msg += ', ';
+				if(!msg && support) msg += 'Mobile: ';
+				if(support) msg += device_os[i].replace('_os','') + ' ' + this.s[device_os[i]] + '+';
+			}
+			this.el
+				.append('<p>'+msg+'</p>')
+				.show();
 		}
 	}
 	
