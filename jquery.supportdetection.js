@@ -35,7 +35,7 @@ Version: .1
 			firefox_human: 12,
 			opera:		false,		// no support
 			opera_human: null,
-			browser_msg: '<p id="support-browser">This is site will look and function best using the most updated version of your browser. Please check the supported list below. You can download the latest version of <a href="http://www.google.com/chrome">Google Chrome</a> or <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> to have the best experience.</p>',
+			browser_msg: '<p id="support-browser">This is site will look and function best using the most updated version of your browser. You can download the latest version of <a href="http://www.google.com/chrome">Google Chrome</a> or <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> to have the best experience.</p>',
 			test_browser: false,
 			// Devices
 			ipad:		534,		// v2:534, v1:533
@@ -52,8 +52,9 @@ Version: .1
 			android_os:		2.3,
 			blackberry_os:	false,	// no support
 			windows_phone_os: false,// no support
-			device_msg:		'<p id="support-device">This is site may look and function best using the most updated version of your operating system. Please check the supported list below or try updating your device opperating system.</p>',
-			test_mobile_os: false
+			device_msg:		'<p id="support-device">This is site may look and function best using the most updated version of your operating system.</p>',
+			test_mobile_os: false,
+			show_supported:	false
 		}, s);
 		this.uagent = navigator.userAgent.toLowerCase();
 		this.mobile = false;
@@ -69,7 +70,7 @@ Version: .1
 		}else {
 			if(this.s.test_browser) this.test_browsers();
 		}
-		if(this.not_supported.length > 0) this.show_supported();
+		if(this.s.show_supported && (this.not_supported.length > 0)) this.show_supported();
 
 		return this;
 	};
